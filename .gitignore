@@ -10,3 +10,4 @@
 
 # Exclude dnscrypt config file
 *.toml
+*.old
