@@ -6,34 +6,19 @@ This repository contains a Dockerfile that spins up a container running a BIND s
 
 - Docker installed on your machine.
 
-## Generating DNSCrypt Stamps
-
-Before running the script, generate your DNSCrypt stamps:
-
-1. Visit [DNSCrypt](https://dnscrypt.info/stamps/).
-2. Change the **Protocol** to **DNS-over-HTTPS**.
-3. Generate the first stamp:
-   - **IP**: `204.74.103.5`
-   - **Host**: `rcsv1.ddr.ultradns.com`
-   - **Path**: `/{your_uddr_client_id}` (Replace `{your_uddr_client_id}` with your unique client ID)
-4. Generate the second stamp:
-   - **IP**: `204.74.122.5`
-   - **Host**: `rcsv2.ddr.ultradns.com`
-   - **Path**: Use the same path as the first stamp.
-
 ## Installation and Configuration
 
 1. Clone this repository:
    ```bash
    git clone https://github.com/sbarbett/uddr_docker_relay
    ```
-2. Build the Docker container, passing your stamps as arguments (separated by a comma):
+2. Build the Docker container:
 	```bash
-	docker build --build-arg SERVER_STAMPS="sdns://AgcAAAAAAAAADDIwNC43NC4xMDMuNQAWcmNzdjEuZGRyLnVsdHJhZG5zLmNvbSUvNTRhYTAwYWEtZjE2NS00YmQyLTg3MzktODFmNTNjOWJiOTEx,sdns://AgcAAAAAAAAADDIwNC43NC4xMjIuNQAWcmNzdjIuZGRyLnVsdHJhZG5zLmNvbSUvNTRhYTAwYWEtZjE2NS00YmQyLTg3MzktODFmNTNjOWJiOTEx" -t dns-relay .
+	docker build -t dns-relay .
 	```
-3. Run the container, making sure to open port 53:
+3. Run the container, passing your UDDR client UID (install key) as an environment variable and opening port 53:
 	```bash
-	docker run -d --name dns-relay -p 53:53/udp -p 53:53/tcp dns-relay
+	docker run -d --name dns-relay -e CLIENT_ID=your_client_id -p 53:53/udp -p 53:53/tcp dns-relay
 	```
 
 Now, you can test it by using dig or nslookup to perform a DNS query:
