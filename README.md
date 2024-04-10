@@ -1,6 +1,6 @@
 # uddr_docker_relay
 
-This repository contains a Dockerfile that spins up a container running a BIND server. This BIND server relays queries to dnscrypt-proxy, which resolves the queries via DoH (DNS-over-HTTPS) using custom resolvers. The instructions provided demonstrate how to configure Vercara's UltraDDR servers, though the setup should work with any recursive DNS servers.
+This repository contains a Dockerfile that spins up a container running a BIND server. This BIND server relays queries to dnscrypt-proxy, which resolves the queries via DoH (DNS-over-HTTPS) using custom resolvers.
 
 ## Prerequisites
 
